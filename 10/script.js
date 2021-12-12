@@ -1,6 +1,6 @@
 function getCoins(change) {
     const coins = [1, 2, 5, 10, 20, 50];
-    const reversedCoins = coins.reverse();
+    const reversedCoins = [...coins].reverse();
     let amount = change;
     const coinsAmount = reversedCoins.map(coin => {
         const coinsUsed = Math.floor(amount / coin);
