@@ -9,12 +9,12 @@ function checkSledJump(heights) {
 
     // 3. do both ascent and descent exist? (Zenit is the only value)
     if (ascent.length === 1 || descent.length === 1) {
-        return false
+        return false;
     }
 
     // 4. check every subarray is ordered
-    let isAscentOk = true
-    let isDescentOk = true
+    let isAscentOk = true;
+    let isDescentOk = true;
     ascent.forEach((item, index, arr) => {
         if (index > 0) {
             const diff = item - arr[index - 1];
@@ -32,11 +32,11 @@ function checkSledJump(heights) {
         }
     });
 
-    return (isAscentOk && isDescentOk)
+    return (isAscentOk && isDescentOk);
 }
 
 
-console.log(checkSledJump([2, 4, 4, 6, 2])) // false: no sube de forma estricta
-console.log(checkSledJump([1, 2, 3])) // false: sólo sube
-console.log(checkSledJump([3, 2, 1])) // false: sólo sube
-console.log(checkSledJump([1, 2, 3, 2, 1, 2, 3])) // false: sube y baja y sube... ¡no vale!
+console.log(checkSledJump([2, 4, 4, 6, 2])); // false: no sube de forma estricta
+console.log(checkSledJump([1, 2, 3])); // false: sólo sube
+console.log(checkSledJump([3, 2, 1])); // false: sólo sube
+console.log(checkSledJump([1, 2, 3, 2, 1, 2, 3])); // false: sube y baja y sube... ¡no vale!
