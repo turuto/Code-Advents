@@ -1,5 +1,3 @@
-
-
 # La ruta con los regalos
 
 > La gente cree que la bolsa de Santa Claus no tiene fondo pero la realidad es que son los elfos que se encargan de hacer que sus viajes encajen para llevar y recoger todos los regalos por todo el mundo.
