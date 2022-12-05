@@ -1,8 +1,0 @@
-# Titulo
-
-> Lead.
-
-
-```javascript
-
-```
