@@ -2,7 +2,6 @@ function getGiftsToRefill(a1, a2, a3) {
     const allWarehouses = a1.concat(a2).concat(a3);
     const singleProds =[... new Set(allWarehouses)];
     const objectsToRefill =[];
-    console.log(singleProds)
     const counts =singleProds.map(product => {
         let count = 0;
         let isInWare1 = a1.includes(product);
