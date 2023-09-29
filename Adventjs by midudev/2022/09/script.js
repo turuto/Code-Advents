@@ -22,19 +22,20 @@ export default function countTime(leds) {
         
         if (allLedsAreON || onlyOneLed) {
             return count
-        } else {
-          const nextLeds = leds.map((item, index) => {
-              if (item === 1) return 1;
-  
-              const lastLed =  leds[leds.length - 1];
-              const previousLed = leds[index - 1] === undefined ? lastLed : leds[index - 1];
-              return previousLed === 1 ? 1 : 0;
-          });
+        }
 
-          const nextStep = count + 1;
-          return  iterateLeds(nextLeds, nextStep);
-      }
+        const nextLeds = leds.map((item, index) => {
+            if (item === 1) return 1;
+
+            const lastLed =  leds[leds.length - 1];
+            const previousLed = leds[index - 1] === undefined ? lastLed : leds[index - 1];
+            return previousLed === 1 ? 1 : 0;
+        });
+
+        const nextStep = count + 1;
+        return  iterateLeds(nextLeds, nextStep);
     } 
+
     checkLedsValidity(leds);
     
     const STEP_TIME = 7;
