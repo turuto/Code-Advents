@@ -86,7 +86,7 @@ describe('valid jumps', () => {
 
     test('floating and down cases', () => {
         let jump = [2,2,2,2,2,1];
-        expect(checkJump(jump)).toBe(true);
+        expect(checkJump(jump)).toBe(false);
         
         jump = [3,3,3,3,3,2,2,1];
         expect(checkJump(jump)).toBe(false);
