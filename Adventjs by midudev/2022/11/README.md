@@ -17,8 +17,6 @@ getCompleted("01:10:10", "03:30:30"); // '1/3'
 getCompleted("03:30:30", "05:50:50"); // '3/5
 ```
 
-Necesitamos que el programa devuelva un boolean que indique si el trineo hace una parabola o no.
-
 A tener en cuenta
 
 ### Cosas a tener en cuenta y consejos:
