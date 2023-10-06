@@ -1,5 +1,6 @@
 export default function getCompleted(part, total) {
     const greatestCommonDivisor = function (a, b) {
+        // this is following the Euclidean Algorithm
         if (a % b === 0) {
             return b;
         }
