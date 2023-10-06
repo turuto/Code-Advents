@@ -26,5 +26,3 @@ export default function getCompleted(part, total) {
     const denominator = totalInSeconds / commonDivisor;
     return `${numerator}/${denominator}`;
   }
-
-  getCompleted('01:00:00', '03:00:00');
