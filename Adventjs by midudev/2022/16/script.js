@@ -1,39 +1,30 @@
-export default function decorateTree(base) {
-    const ORNAMENTS = ['B', 'R', 'P'];
-    const findNextOrnament = (pair) => {
-        let [a, b] = pair.split('');
-        if (a === b) {
-            return a;
-        }
-        return ORNAMENTS.filter((item) => item !== a && item !== b);
-    };
-    const generatePairs = (str) => {
-        const letters = str.split('');
-        const pairs = [];
-        for (let i = 0; i < letters.length - 1; i++) {
-            pairs.push(letters[i] + letters[i + 1]);
-        }
-        return pairs;
-    };
-    const createTreeRows = (str) => {
-        if (str.length === 1) {
-            return str;
-        } else {
-            const pairs = generatePairs(str);
+export default function fixLetter(letter) {
+    let result;
+    // Eliminar espacios al inicio y al final
+    result = letter.trim();
 
-            const newRow = pairs.map((pair) => findNextOrnament(pair)).join('');
-            tree.push(newRow);
-            createTreeRows(newRow);
-        }
-    };
+    // Eliminar múltiples espacios en blanco y dejar sólo uno
+    const removeMultipleSpaces = (str) => str.replace(/\s+/g, ' ');
+    result = removeMultipleSpaces(result);
 
-    //while  leght es mayor de 1 , generar next row
-    const tree = [];
-    const flatBase = base.split(' ').join('');
-    tree.push(flatBase);
-    createTreeRows(flatBase);
-    const finalTree = tree.map((row) => row.split('').join(' ')).reverse();
-    return finalTree;
+    // Dejar un espacio después de cada coma
+    const ensureOneSpaceAfterComma = (str) => str.replace(/,(?!\s)/g, ', ');
+    result = ensureOneSpaceAfterComma(result);
+
+    // Quitar espacios antes de coma o punto
+    const removeSpaceBeforePunctuation = (str) => {
+        return str.replace(/\s+([,.])/g, '$1');
+    };
+    result = removeSpaceBeforePunctuation(result);
+
+    // Las preguntas sólo deben terminar con un signo de interrogación
+    const removeMultipleQuestionMarks = (str) => str.replace(/\?+/g, '?');
+    result = removeMultipleQuestionMarks(result);
+    // La primera letra de cada oración debe estar en mayúscula
+    // Poner en mayúscula la palabra "Santa Claus" si aparece en la carta
+    // Poner un punto al final de la frase si no tiene puntuación
+    return result;
 }
 
 // Example usage
+console.log(fixLetter('   HOLA  que   tal   '));
