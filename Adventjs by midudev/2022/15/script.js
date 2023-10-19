@@ -1,5 +1,6 @@
 export default function decorateTree(base) {
     const ORNAMENTS = ['B', 'R', 'P'];
+
     const findNextOrnament = (pair) => {
         let [a, b] = pair.split('');
         if (a === b) {
@@ -7,6 +8,7 @@ export default function decorateTree(base) {
         }
         return ORNAMENTS.filter((item) => item !== a && item !== b);
     };
+
     const generatePairs = (str) => {
         const letters = str.split('');
         const pairs = [];
@@ -15,6 +17,7 @@ export default function decorateTree(base) {
         }
         return pairs;
     };
+
     const createTreeRows = (str) => {
         if (str.length === 1) {
             return str;
@@ -27,13 +30,15 @@ export default function decorateTree(base) {
         }
     };
 
-    //while  leght es mayor de 1 , generar next row
+    const removeSpaces = (str) => str.split(' ').join('');
+    const insertSpaces = (str) => str.split('').join(' ');
+
     const tree = [];
-    const flatBase = base.split(' ').join('');
+    const flatBase = removeSpaces(base);
     tree.push(flatBase);
     createTreeRows(flatBase);
-    const finalTree = tree.map((row) => row.split('').join(' ')).reverse();
+    const finalTree = tree.map((row) => insertSpaces(row)).reverse();
     return finalTree;
 }
 
-// Example usage
+
