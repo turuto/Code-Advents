@@ -1,28 +1,23 @@
 export default function carryGifts(gifts, maxWeight) {
     const bags = [];
-    const canuseLastBag = (num, limit) => {
+    const shouldUseNewBag = (num, limit) => {
         if (bags.length === 0) {
-            return false;
+            return true;
         }
+
         const lastBag = bags[bags.length - 1];
-        const spaceOccupied = lastBag.reduce(
-            (acc, item) => acc + item.length,
-            0
-        );
-        const isRoom = limit - spaceOccupied >= num;
-        return isRoom;
+        const busySpace = lastBag.reduce((acc, item) => acc + item.length, 0);
+        const notEnoughRoom = limit - busySpace < num;
+        return notEnoughRoom;
     };
 
-    const allItemsAreTooBig = gifts.every((gift) => gift.length > maxWeight);
-    if (allItemsAreTooBig) return bags;
+    const allItemsAreTooHeavy = gifts.every((gift) => gift.length > maxWeight);
+    if (allItemsAreTooHeavy) return bags;
 
     gifts.forEach((gift) => {
-        console.log('checking room for ', gift);
-        const isRoomEnough = canuseLastBag(gift.length, maxWeight);
-        if (!isRoomEnough) {
-            const newBag = [];
-            bags.push(newBag);
-        }
+        const newBagIsNeeded = shouldUseNewBag(gift.length, maxWeight);
+        if (newBagIsNeeded) bags.push([]);
+
         const lastBag = bags[bags.length - 1];
         lastBag.push(gift);
     });
