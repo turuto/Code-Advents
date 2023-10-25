@@ -14,8 +14,8 @@ export default function sortToys(toys, positions) {
     return sortedArray;
 }
 
-const moreToys = ['pc', 'xbox', 'ps4', 'switch', 'nintendo'];
-const morePositions = [8, 6, 5, 7, 9];
+const moreToys = ['ball', 'doll', 'car', 'puzzle'];
+const morePositions = [2, 3, 1, 0];
 
 console.log(sortToys(moreToys, morePositions));
 // ['ps4', 'xbox', 'switch', 'pc', 'nintendo']
