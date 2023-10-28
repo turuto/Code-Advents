@@ -5,18 +5,7 @@ export default function howManyReindeers(reindeerTypes, gifts) {
         );
 
         const fixedDistribution = optimizeList(currentDistribution);
-        //need to format the list
-        const formattedList = fixedDistribution
-            .map((item, index) => {
-                const finalObj = {
-                    type: sortedReindeerTypes[index].type,
-                    num: item,
-                };
-                return finalObj;
-            })
-            .filter((item) => item.num > 0);
-
-        return formattedList;
+        return fixedDistribution;
     };
     const optimizeList = (arr) => {
         let isSorted = isSortedAscending(arr);
@@ -62,7 +51,16 @@ export default function howManyReindeers(reindeerTypes, gifts) {
     };
 
     const formatReindeerList = (reindeerList) => {
-        return reindeerList;
+        const result = reindeerList
+            .map((item, index) => {
+                const finalObj = {
+                    type: sortedReindeerTypes[index].type,
+                    num: item,
+                };
+                return finalObj;
+            })
+            .filter((item) => item.num > 0);
+        return result;
     };
 
     const createCountryShipment = (data) => {
@@ -72,8 +70,6 @@ export default function howManyReindeers(reindeerTypes, gifts) {
 
         let remaining = total;
         // first round: getting the highest choices
-        console.log('SORTED TYOES', sortedReindeerTypes);
-
         for (let reindeer of sortedReindeerTypes) {
             while (remaining >= reindeer.weightCapacity) {
                 reindeerList.push(reindeer);
