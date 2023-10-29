@@ -1,110 +1,42 @@
 export default function howManyReindeers(reindeerTypes, gifts) {
-    const refineList = (list) => {
-        const currentDistribution = sortedReindeerTypes.map((deer) =>
-            countDeer(deer, list)
-        );
+    return gifts.map((gift) => {
+        let max = gift.weight;
+        let reindeers = reindeerTypes
+            .map((x) => [x.type, x.weightCapacity])
+            .filter((x) => x[1] < max)
+            .sort((a, b) => a[1] - b[1]); // Menor a Mayor
 
-        const fixedDistribution = optimizeList(currentDistribution);
-        return fixedDistribution;
-    };
-    const optimizeList = (arr) => {
-        let isSorted = isSortedAscending(arr);
-        const exchangeRates = getExchangeRates();
+        let res = reindeers.map(([type]) => ({
+            type,
+            num: 0,
+        }));
 
-        while (!isSorted) {
-            for (let i = 0; i < arr.length - 1; i++) {
-                let item = arr[i];
-                let nextItem = arr[i + 1];
-                const exchangeRate = exchangeRates[i];
+        reindeers.map((_, i) => {
+            let sliced = reindeers.slice(0, reindeers.length - i);
+            let sum = sliced.reduce((sum, e) => sum + e[1], 0);
+            sliced.map((_, i) => {
+                res[i].num += Math.floor(max / sum);
+            });
+            max %= sum;
+        });
 
-                if (item > nextItem) {
-                    arr[i] = item - 1;
-                    arr[i + 1] = nextItem + exchangeRate;
-                }
-            }
-            isSorted = isSortedAscending(arr);
-        }
-
-        return arr;
-    };
-    const getExchangeRates = () => {
-        const result = [];
-        for (let i = 0; i < sortedReindeerTypes.length - 1; i++) {
-            const rate =
-                sortedReindeerTypes[i].weightCapacity /
-                sortedReindeerTypes[i + 1].weightCapacity;
-            result.push(rate);
-        }
-        return result;
-    };
-    const isSortedAscending = (arr) => {
-        for (let i = 0; i < arr.length - 1; i++) {
-            if (arr[i] > arr[i + 1]) {
-                return false;
-            }
-        }
-        return true;
-    };
-
-    const countDeer = (item, list) => {
-        return list.filter((value) => value === item).length;
-    };
-
-    const formatReindeerList = (reindeerList) => {
-        const result = reindeerList
-            .map((item, index) => {
-                const finalObj = {
-                    type: sortedReindeerTypes[index].type,
-                    num: item,
-                };
-                return finalObj;
-            })
-            .filter((item) => item.num > 0);
-        return result;
-    };
-
-    const createCountryShipment = (data) => {
-        const { country, weight: total } = data;
-
-        const reindeerList = [];
-
-        let remaining = total;
-        // first round: getting the highest choices
-        for (let reindeer of sortedReindeerTypes) {
-            while (remaining >= reindeer.weightCapacity) {
-                reindeerList.push(reindeer);
-                remaining -= reindeer.weightCapacity;
-            }
-        }
-        // second round: refine the list
-        const refinedList = refineList(reindeerList);
-        const finalObj = {
-            country,
-            reindeers: formatReindeerList(refinedList),
+        return {
+            country: gift.country,
+            reindeers: res.reverse(),
         };
-        return finalObj;
-    };
-    const sortedReindeerTypes = reindeerTypes.sort((a, b) => {
-        if (a.weightCapacity > b.weightCapacity) {
-            return -1;
-        }
-        if (a.weightCapacity < b.weightCapacity) {
-            return 1;
-        }
-        return 0;
     });
-    const result = gifts.map((obj) => createCountryShipment(obj));
-    return result;
 }
 
 const reindeerTypes = [
+    { type: 'Nuclear', weightCapacity: 50 },
+    { type: 'Electric', weightCapacity: 10 },
+    { type: 'Gasoline', weightCapacity: 5 },
     { type: 'Diesel', weightCapacity: 1 },
-    { type: 'Gasoline', weightCapacity: 8 },
 ];
 
 const gifts = [
-    { country: 'Colombia', weight: 50 },
-    { country: 'España', weight: 20 },
+    { country: 'Colombia', weight: 30 },
+    //{ country: 'España', weight: 20 },
 ];
 
 console.log(howManyReindeers(reindeerTypes, gifts));
