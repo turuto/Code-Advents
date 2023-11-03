@@ -98,3 +98,7 @@ test('Test #11', () => {
         ])
     ).toStrictEqual(true);
 });
+
+test('Test #11', () => {
+    expect(canExit([])).toStrictEqual(false);
+});
