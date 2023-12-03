@@ -1,16 +1,14 @@
-export default function manufacture(gifts, materials) {
-    const canBeBuilt = (toy) => {
-        const lettersNeeded = toy.split('');
-        const isPossible = lettersNeeded.every((letter) =>
-            materials.includes(letter)
-        );
-        return isPossible;
-    };
-    const possibleGifts = gifts.filter((item) => canBeBuilt(item));
-    return possibleGifts;
+export default function findNaughtyStep(original, modified) {
+    if (original.length === modified.length) return '';
+
+    const longList = original.length > modified.length ? original : modified;
+    const shortList = original.length < modified.length ? original : modified;
+
+    for (let i = 0; i < longList.length; i++) {
+        if (longList[i] !== shortList[i]) return longList[i];
+    }
 }
 
-const gifts = ['tren', 'oso', 'pelota'];
-const materials = 'tronesa';
-
-console.log(manufacture(gifts, materials));
+const original = 'stepfor';
+const modified = 'stepor';
+console.log(findNaughtyStep(original, modified)); // 'f'

@@ -1,27 +1,27 @@
-# PONEMOS EN MARCHA LA FÁBRICA
+# EL ELFO TRAVIESO
 
-> En el taller de Santa, los elfos tienen una lista de regalos que desean fabricar y un conjunto limitado de materiales.
+> En el taller de Santa, un elfo travieso ha estado jugando en la cadena de fabricación de regalos, añadiendo o eliminando un paso no planificado.
 
-Los regalos son cadenas de texto y los materiales son caracteres. Tu tarea es escribir una función que, dada una lista de regalos y los materiales disponibles, devuelva una lista de los regalos que se pueden fabricar.
+Tienes la secuencia original de pasos en la fabricación original y la secuencia modificada modified que puede incluir un paso extra o faltar un paso.
 
-Un regalo se puede fabricar si contamos con todos los materiales necesarios para fabricarlo.1.
+Tu tarea es escribir una función que identifique y devuelva el primer paso extra que se ha añadido o eliminado en la cadena de fabricación. Si no hay ninguna diferencia entre las secuencias, devuelve una cadena vacía.
 
 ```javascript
-const gifts = ['tren', 'oso', 'pelota'];
-const materials = 'tronesa';
+const original = 'abcd';
+const modified = 'abcde';
+findNaughtyStep(original, modified); // 'e'
 
-manufacture(gifts, materials); // ["tren", "oso"]
-// 'tren' SÍ porque sus letras están en 'tronesa'
-// 'oso' SÍ porque sus letras están en 'tronesa'
-// 'pelota' NO porque sus letras NO están en 'tronesa'
+const original = 'stepfor';
+const modified = 'stepor';
+findNaughtyStep(original, modified); // 'f'
 
-const gifts = ['juego', 'puzzle'];
-const materials = 'jlepuz';
-
-manufacture(gifts, materials); // ["puzzle"]
-
-const gifts = ['libro', 'ps5'];
-const materials = 'psli';
-
-manufacture(gifts, materials); // []
+const original = 'abcde';
+const modified = 'abcde';
+findNaughtyStep(original, modified); // ''
 ```
+
+## A tener en cuenta
+
+- Siempre habrá un paso de diferencia o ninguno.
+- La modificación puede ocurrir en cualquier lugar de la cadena.
+- La secuencia original puede estar vacía
